@@ -9,7 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="Excel File 파싱 안되는 버그 수정. 피벗테이블 전격 지원 위한 내용 추가." />
+    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="Excel File 파싱 안되는 버그 수정. 피벗테이블 전격 지원 위한 내용 추가.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/style/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +203,7 @@
       <option name="presentableId" value="Default" />
       <updated>1729510972668</updated>
       <workItem from="1729510973854" duration="3538000" />
-      <workItem from="1729514703037" duration="20445000" />
+      <workItem from="1729514703037" duration="22830000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
