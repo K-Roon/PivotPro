@@ -9,7 +9,7 @@ public class HomeController {
 
     @RequestMapping("/hello")
     public String home(){
-        return "hello";
+        return "hello.jsp";
     }
 
     @GetMapping("/upload")
