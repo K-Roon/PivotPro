@@ -7,8 +7,6 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
     margin: 2rem auto;
     background: white;
     padding: 2rem;
@@ -52,16 +50,16 @@ tr:hover {
 }
 
 /* 컨텍스트 메뉴 스타일 */
-#contextMenu {
-    position: absolute;
-    z-index: 1000;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    border-radius: 5px;
-    display: none; /* 기본적으로 숨김 */
-}
+/*#contextMenu {*/
+/*    position: absolute;*/
+/*    z-index: 1000;*/
+/*    background-color: white;*/
+/*    border: 1px solid #ccc;*/
+/*    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);*/
+/*    padding: 10px;*/
+/*    border-radius: 5px;*/
+/*    display: none; !* 기본적으로 숨김 *!*/
+/*}*/
 
 #contextMenu ul {
     list-style: none;

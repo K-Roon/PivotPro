@@ -4,7 +4,7 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.pivotpro</groupId>
+  <groupId>com.kroon</groupId> <!-- 그룹 ID를 com.kroon으로 변경 -->
   <artifactId>PivotPro</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -118,6 +118,17 @@
         <version>3.4.0</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+
+      <!-- Tomcat Embed Plugin (adjusted for Tomcat 11) -->
+      <plugin>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>11.0.0</version>
+        <configuration>
+          <maxFileSize>4GB</maxFileSize>
+          <maxRequestSize>4GB</maxRequestSize>
         </configuration>
       </plugin>
     </plugins>
