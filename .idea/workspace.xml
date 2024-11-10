@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="Excel 파일 읽기 완료. 시스템 안정화">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="행이 잘못 움직여지는 버그 수정.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/style/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +207,7 @@
       <workItem from="1729650453972" duration="4658000" />
       <workItem from="1729658566181" duration="3040000" />
       <workItem from="1729832746668" duration="1893000" />
-      <workItem from="1729918843304" duration="896000" />
+      <workItem from="1729918843304" duration="5321000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -252,7 +249,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729652448019</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="행이 잘못 움직여지는 버그 수정.">
+      <option name="closed" value="true" />
+      <created>1729919842701</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1729919842701</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +279,7 @@
     <MESSAGE value="파일 업로드 이슈 수정 및 글자깨짐현상 수정" />
     <MESSAGE value="Excel File 파싱 안되는 버그 수정. 피벗테이블 전격 지원 위한 내용 추가." />
     <MESSAGE value="Excel 파일 읽기 완료. 시스템 안정화" />
-    <option name="LAST_COMMIT_MESSAGE" value="Excel 파일 읽기 완료. 시스템 안정화" />
+    <MESSAGE value="행이 잘못 움직여지는 버그 수정." />
+    <option name="LAST_COMMIT_MESSAGE" value="행이 잘못 움직여지는 버그 수정." />
   </component>
 </project>

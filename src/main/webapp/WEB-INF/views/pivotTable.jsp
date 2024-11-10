@@ -6,55 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>피벗 테이블</title>
-    <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-            cursor: pointer;
-        }
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .draggable-column {
-            cursor: move;
-        }
         #contextMenu {
-            display: none;
+            display: none; /* 기본적으로 숨김 */
             position: absolute;
             z-index: 1000;
             background-color: white;
             border: 1px solid #ccc;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
             padding: 10px;
             border-radius: 5px;
-        }
-        #contextMenu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        #contextMenu ul li {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        #contextMenu ul li:hover {
-            background-color: #f0f0f0;
         }
     </style>
 </head>
@@ -125,16 +87,20 @@
     let excelDataJS = [];
     let headerDataJS = [];
 
+    // 엑셀 데이터를 자바스크립트 배열로 변환
     excelDataJS = [
         <c:forEach var="row" items="${excelData}">
         ["<c:forEach var="cell" items="${row}">${cell}<c:if test="${!status.last}">", "</c:if></c:forEach>"],
         </c:forEach>
     ];
+    // 헤더 데이터도 자바스크립트 배열로 변환
     headerDataJS = excelDataJS[0];
 
     function renderTable() {
         const tableBody = document.getElementById('pivotTableBody');
         const headerRow = document.getElementById('headerRow');
+
+        // 헤더 재렌더링
         headerRow.innerHTML = '';
         headerDataJS.forEach((header, index) => {
             const th = document.createElement('th');
@@ -148,8 +114,9 @@
             headerRow.appendChild(th);
         });
 
-        tableBody.innerHTML = '';
-        for (let i = 1; i < excelDataJS.length; i++) {
+        // 본문 데이터 재렌더링
+        tableBody.innerHTML = ''; // 기존 데이터 삭제
+        for (let i = 1; i < excelDataJS.length; i++) { // 첫 번째 행은 헤더이므로 제외
             const row = document.createElement('tr');
             excelDataJS[i].forEach((cell, index) => {
                 const td = document.createElement('td');
@@ -160,6 +127,7 @@
         }
     }
 
+    // 열 드래그 앤 드롭 기능
     function allowDrop(event) {
         event.preventDefault();
     }
@@ -176,10 +144,10 @@
         }
     }
 
+    // 열 교체 함수 - 데이터 배열과 헤더 배열 모두 교체한 후 테이블을 재렌더링
     function shiftColumns(fromIndex, toIndex) {
         const element = headerDataJS.splice(fromIndex, 1)[0];
         headerDataJS.splice(toIndex, 0, element);
-
         for (let i = 0; i < excelDataJS.length; i++) {
             const rowElement = excelDataJS[i].splice(fromIndex, 1)[0];
             excelDataJS[i].splice(toIndex, 0, rowElement);
@@ -187,15 +155,17 @@
         renderTable();
     }
 
+    // 우클릭 컨텍스트 메뉴 표시
     function showContextMenu(event) {
         event.preventDefault();
         clickedColumnIndex = event.target.cellIndex;
         const contextMenu = document.getElementById('contextMenu');
         contextMenu.style.display = 'block';
-        contextMenu.style.left = `${event.pageX}px`;
-        contextMenu.style.top = `${event.pageY}px`;
+        contextMenu.style.left = `${event.clientX}px`; // 정확한 위치
+        contextMenu.style.top = `${event.clientY}px`;
     }
 
+    // 컨텍스트 메뉴 숨기기
     document.addEventListener('click', function(event) {
         const contextMenu = document.getElementById('contextMenu');
         if (!contextMenu.contains(event.target)) {
@@ -203,6 +173,7 @@
         }
     });
 
+    // 열 복제
     function duplicateColumn() {
         headerDataJS.splice(clickedColumnIndex, 0, headerDataJS[clickedColumnIndex]);
         for (let i = 0; i < excelDataJS.length; i++) {
@@ -211,6 +182,7 @@
         renderTable();
     }
 
+    // 열 삭제
     function deleteColumn() {
         headerDataJS.splice(clickedColumnIndex, 1);
         for (let i = 0; i < excelDataJS.length; i++) {
@@ -219,6 +191,7 @@
         renderTable();
     }
 
+    // 테이블 초기 렌더링
     renderTable();
 </script>
 </body>
