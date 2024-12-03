@@ -1,89 +1,68 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="ko">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>엑셀 파일 업로드</title>
-    <link rel="stylesheet" href="style/styles.css">
+    <title>파일 업로드</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+            margin-top: 10px;
         }
-
-        .drop-zone {
-            max-width: 400px;
-            height: 200px;
-            padding: 50px 5px;
-            border: 2px dashed #0071e3;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        #progressBar div {
+            height: 20px;
+            width: 0;
+            background-color: #4caf50;
             text-align: center;
-            color: #0071e3;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .drop-zone.dragover {
-            background-color: #e0f7ff;
+            line-height: 20px;
+            color: white;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>엑셀 파일을 업로드하세요</h1>
-    <form id="upload-form" method="post" enctype="multipart/form-data" action="uploadExcelFile">
-        <div class="file-input">
-            <input type="file" name="file" id="file" class="file" style="display: none;">
-            <label for="file" class="drop-zone" id="drop-zone">여기에 파일을 끌어다 놓으세요.<br>(아니면 선택하기...)</label>
-        </div>
-        <button type="submit" class="btn" id="submitButton" style="display: none;">업로드</button>
-    </form>
-</div>
+<h1>파일 업로드</h1>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput">
+    <button type="button" onclick="uploadFile()">업로드</button>
+</form>
+<div id="progressBar"><div></div></div>
+<div id="statusMessage"></div>
 
 <script>
-    const dropZone = document.getElementById('drop-zone');
-    const fileInput = document.getElementById('file');
-    const form = document.getElementById('upload-form');
+    function uploadFile() {
+        const formData = new FormData(document.getElementById('uploadForm'));
+        const xhr = new XMLHttpRequest();
 
-    // 파일을 클릭해서 선택할 때
-    dropZone.addEventListener('click', () => {
-        fileInput.click();
-    });
+        xhr.open("POST", "/uploadExcelFile", true);
 
-    // 파일이 선택되면 자동으로 폼을 제출
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length) {
-            form.submit(); // 파일 선택 후 바로 폼 제출
-        }
-    });
+        // 업로드 진행 상태 업데이트
+        xhr.upload.onprogress = function(event) {
+            if (event.lengthComputable) {
+                const percentComplete = (event.loaded / event.total) * 100;
+                document.querySelector("#progressBar div").style.width = percentComplete + "%";
+                document.querySelector("#progressBar div").textContent = Math.round(percentComplete) + "%";
+            }
+        };
 
-    // 드래그 앤 드롭 이벤트 처리
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-    });
+        // 업로드 완료 시 처리
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById("statusMessage").textContent = "업로드 완료!";
+                // 페이지 이동 (예: 결과 페이지로 이동)
+                setTimeout(() => {
+                    window.location.href = "/pivotTable";
+                }, 2000);
+            } else {
+                document.getElementById("statusMessage").textContent = "업로드 실패!";
+            }
+        };
 
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('dragover');
-    });
+        // 업로드 시작 표시
+        document.getElementById("statusMessage").textContent = "업로드 중...";
 
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-
-        const files = e.dataTransfer.files;
-        if (files.length) {
-            fileInput.files = files; // 파일 선택
-            form.submit(); // 파일 드롭 후 바로 폼 제출
-        }
-    });
+        xhr.send(formData);
+    }
 </script>
 </body>
 </html>

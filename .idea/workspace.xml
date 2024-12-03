@@ -10,9 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="MVC 패턴 재검토 및 파일 업로드 방식 수정.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/model/ExcelData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/controller/ExcelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/controller/ExcelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kroon/pivotpro/controller/ExcelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/servlet-context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/upload.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/upload.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +219,7 @@
       <workItem from="1732682801005" duration="43000" />
       <workItem from="1732682885816" duration="185000" />
       <workItem from="1732683559572" duration="527000" />
-      <workItem from="1733213756504" duration="2348000" />
+      <workItem from="1733213756504" duration="4096000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -283,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733218917402</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="MVC 패턴 재검토 및 파일 업로드 방식 수정.">
+      <option name="closed" value="true" />
+      <created>1733219255276</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733219255276</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,5 +319,15 @@
     <MESSAGE value="행이 잘못 움직여지는 버그 수정 진행중" />
     <MESSAGE value="MVC 패턴 재검토 및 파일 업로드 방식 수정." />
     <option name="LAST_COMMIT_MESSAGE" value="MVC 패턴 재검토 및 파일 업로드 방식 수정." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.beans.factory.BeanDefinitionStoreException" package="org.springframework.beans.factory" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
