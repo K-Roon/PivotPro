@@ -1,4 +1,4 @@
-package com.kroon.pivotpro;
+package com.kroon.pivotpro.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +9,17 @@ public class HomeController {
 
     @RequestMapping("/hello")
     public String home(){
-        return "hello.jsp";
+        return "hello";
     }
 
     @GetMapping("/upload")
     public String uploadPage() {
-        return "upload.jsp";
+        return "upload";
     }
 
-    @GetMapping({"/styles.css", "/style/styles.css"})
-    public String styles() {
-        return "style/styles.css";
-    }
+//    @GetMapping({"/styles.css", "/style/styles.css"})
+//    public String styles() {
+//        return "style/styles.css";
+//    }
 
 }
