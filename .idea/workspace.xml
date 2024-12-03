@@ -9,9 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="행이 잘못 움직여지는 버그 수정.">
+    <list default="true" id="6c6391ca-4614-44a9-8b7f-b41439644876" name="변경" comment="행이 잘못 움직여지는 버그 수정 진행중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/pivotTable.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +41,10 @@
     &quot;url&quot;: &quot;https://github.com/K-Roon/PivotPro.git&quot;,
     &quot;accountId&quot;: &quot;52687715-5e05-4ddb-b557-fd367d8f1874&quot;
   }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
 }</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -189,8 +192,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.19416.15" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.19416.15" />
       </set>
     </attachedChunks>
   </component>
@@ -208,6 +211,11 @@
       <workItem from="1729658566181" duration="3040000" />
       <workItem from="1729832746668" duration="1893000" />
       <workItem from="1729918843304" duration="5321000" />
+      <workItem from="1731212468188" duration="1583000" />
+      <workItem from="1732682801005" duration="43000" />
+      <workItem from="1732682885816" duration="185000" />
+      <workItem from="1732683559572" duration="527000" />
+      <workItem from="1733213756504" duration="2014000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -257,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729919842701</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="행이 잘못 움직여지는 버그 수정 진행중">
+      <option name="closed" value="true" />
+      <created>1731212792185</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731212792185</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +296,7 @@
     <MESSAGE value="Excel File 파싱 안되는 버그 수정. 피벗테이블 전격 지원 위한 내용 추가." />
     <MESSAGE value="Excel 파일 읽기 완료. 시스템 안정화" />
     <MESSAGE value="행이 잘못 움직여지는 버그 수정." />
-    <option name="LAST_COMMIT_MESSAGE" value="행이 잘못 움직여지는 버그 수정." />
+    <MESSAGE value="행이 잘못 움직여지는 버그 수정 진행중" />
+    <option name="LAST_COMMIT_MESSAGE" value="행이 잘못 움직여지는 버그 수정 진행중" />
   </component>
 </project>
