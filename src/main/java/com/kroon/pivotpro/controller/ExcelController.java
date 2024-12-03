@@ -24,7 +24,7 @@ public class ExcelController {
     public String uploadFile(Model model, @RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             model.addAttribute("message", "업로드할 파일을 선택하세요.");
-            return "upload.jsp";
+            return "upload";
         }
 
         try {
@@ -49,10 +49,10 @@ public class ExcelController {
             file.transferTo(filePath.toFile());
 
             model.addAttribute("message", "파일이 성공적으로 업로드되었습니다.");
-            return "upload.jsp";
+            return "upload";
         } catch (IOException e) {
             model.addAttribute("message", "파일 업로드 중 오류 발생: " + e.getMessage());
-            return "upload.jsp";
+            return "upload";
         }
     }
 }

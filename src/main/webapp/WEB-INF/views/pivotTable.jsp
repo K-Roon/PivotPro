@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>피벗 테이블</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<c:url value='../../resources/css/styles.css' />">
     <style>
         #contextMenu {
             display: none; /* 기본적으로 숨김 */
