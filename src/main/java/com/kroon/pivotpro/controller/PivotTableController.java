@@ -1,17 +1,23 @@
 package com.kroon.pivotpro.controller;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.util.IOUtils;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.monitorjbl.xlsx.StreamingReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class PivotTableController {
@@ -19,52 +25,79 @@ public class PivotTableController {
     @Autowired
     private ExcelController excelController;
 
-    static {
-        // 최대 크기 제한을 1GB로 설정
-        IOUtils.setByteArrayMaxOverride(1024 * 1024 * 1024);
+    // 업로드 페이지를 표시합니다.
+    @GetMapping("/upload")
+    public String showUploadPage() {
+        return "upload";
     }
 
+    // 파일을 업로드하고 저장합니다.
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file, Model model) {
+        if (file.isEmpty()) {
+            model.addAttribute("message", "업로드된 파일이 없습니다.");
+            return "upload";
+        }
+
+        try {
+            Path uploadPath = Paths.get("uploads/" + file.getOriginalFilename());
+            Files.createDirectories(uploadPath.getParent());
+            Files.write(uploadPath, file.getBytes());
+
+            excelController.setLastUploadedFilePath(uploadPath.toString());
+            model.addAttribute("message", "파일이 성공적으로 업로드되었습니다.");
+            return "pivotTable";
+        } catch (Exception e) {
+            model.addAttribute("message", "파일 업로드 중 오류가 발생했습니다: " + e.getMessage());
+            return "upload";
+        }
+    }
+
+    // 피벗 테이블 리모컨 페이지를 표시합니다.
     @GetMapping("/pivotTable")
-    public String showPivotTable(Model model) {
+    public String showPivotTableControl(Model model) {
+        return "pivotTable";
+    }
+
+    // 피벗 테이블을 생성하여 결과를 표시합니다.
+    @PostMapping("/generateTable")
+    public String generatePivotTable(@RequestParam("column") int columnIndex, Model model) {
         String filePath = excelController.getLastUploadedFilePath();
         if (filePath == null) {
             model.addAttribute("message", "업로드된 파일이 없습니다.");
             return "upload";
         }
 
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            Workbook workbook = filePath.endsWith(".xls") ? new HSSFWorkbook(fis) : new XSSFWorkbook(fis);
-            Sheet sheet = workbook.getSheetAt(0);
+        Path path = Paths.get(filePath);
+        try (InputStream is = Files.newInputStream(path);
+             Workbook workbook = StreamingReader.builder()
+                     .rowCacheSize(1000) // 캐시 크기 증가
+                     .bufferSize(8192) // 버퍼 크기 증가
+                     .open(is)) {
 
-            List<List<String>> excelData = new ArrayList<>();
+            Sheet sheet = workbook.getSheetAt(0);
+            List<List<String>> pivotData = new ArrayList<>();
+
             for (Row row : sheet) {
                 List<String> rowData = new ArrayList<>();
                 for (Cell cell : row) {
-                    rowData.add(cellToString(cell));
+                    rowData.add(cell.toString());
                 }
-                excelData.add(rowData);
+                pivotData.add(rowData);
             }
 
-            model.addAttribute("excelData", excelData);
-            return "pivotTable";
-        } catch (Exception e) {
-            model.addAttribute("message", "파일 읽기 중 오류 발생: " + e.getMessage());
+            Map<String, Long> pivotSummary = pivotData.stream()
+                    .skip(1) // 헤더 행 제외
+                    .collect(Collectors.groupingBy(
+                            row -> row.get(columnIndex), // 선택된 열을 기준으로 그룹화
+                            Collectors.counting() // 발생 횟수 계산
+                    ));
 
-            //오류탐색 임시코드
-            // TODO: 해당 코드는 임시코드이므로, 제거가 필요함.
-            System.out.println(e.getMessage());
+            model.addAttribute("pivotSummary", pivotSummary);
+            return "generatedTable";
+        } catch (Exception e) {
+            model.addAttribute("message", "파일 처리 중 오류가 발생했습니다: " + e.getMessage());
             return "upload";
         }
-    }
-
-    private String cellToString(Cell cell) {
-        return switch (cell.getCellType()) {
-            case STRING -> cell.getStringCellValue();
-            case NUMERIC -> DateUtil.isCellDateFormatted(cell) ? cell.getDateCellValue().toString() :
-                    String.valueOf(cell.getNumericCellValue());
-            case BOOLEAN -> String.valueOf(cell.getBooleanCellValue());
-            case FORMULA -> cell.getCellFormula();
-            default -> "";
-        };
     }
 }
