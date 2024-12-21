@@ -1,32 +1,69 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Generated Pivot Table</title>
+    <meta charset="UTF-8">
+    <title>피벗 테이블 결과</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        caption {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>Generated Pivot Table</h1>
-<%
-    // 매개변수 가져오기
-    String rowField = request.getParameter("rowField");
-    String colField = request.getParameter("colField");
-    String aggregator = request.getParameter("aggregator");
+<h1>피벗 테이블 결과</h1>
+<p><strong>행 필드:</strong> ${rowField}</p>
+<p><strong>열 필드:</strong> ${colField}</p>
+<p><strong>집계 방식:</strong> ${aggregator}</p>
 
-    // 피벗 테이블 생성 로직
-    if (rowField != null && colField != null && aggregator != null) {
-        out.println("<table border='1'>");
-        out.println("<thead><tr><th>" + rowField + "</th><th>" + colField + "</th><th>" + aggregator + "</th></tr></thead>");
-        out.println("<tbody>");
-
-        // 실제 데이터 로직은 백엔드에서 처리
-        for (int i = 0; i < 5; i++) {
-            out.println("<tr><td>Row" + i + "</td><td>Col" + i + "</td><td>" + (i * 10) + "</td></tr>");
-        }
-
-        out.println("</tbody>");
-        out.println("</table>");
-    } else {
-        out.println("<p>컨트롤을 사용하여 피벗 테이블을 구성해 주세요.</p>");
-    }
-%>
+<c:choose>
+    <c:when test="${not empty pivotSummary}">
+        <table>
+            <caption>요약된 데이터</caption>
+            <thead>
+            <tr>
+                <th>${rowField}</th>
+                <th>${colField}</th>
+                <th>값</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="entry" items="${pivotSummary}">
+                <tr>
+                    <td>${entry.key}</td>
+                    <td>
+                        <c:forEach var="colEntry" items="${entry.value}">
+                            ${colEntry.key}: ${colEntry.value}<br>
+                        </c:forEach>
+                    </td>
+                    <td>${entry.value}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </c:when>
+    <c:otherwise>
+        <p>데이터가 없습니다. 요청을 확인하세요.</p>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
